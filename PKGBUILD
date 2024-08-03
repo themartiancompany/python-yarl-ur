@@ -1,14 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
 
-_pep517=false
+_pep517='true'
 _py="python"
 _pkg=yarl
 pkgname="${_py}-${_pkg}"
 pkgver=1.9.4
 pkgrel=2
 pkgdesc='Yet another URL library'
-url='https://github.com'
-url='aio-libs'
+_http='https://github.com'
+_ns='aio-libs'
 url="${_http}/${_ns}/${_pkg}"
 arch=(
   'x86_64'
@@ -57,7 +61,7 @@ b2sums=(
 
 prepare() {
   cd \
-    "${_pkgname}-${pkgver}"
+    "${_pkg}-${pkgver}"
   sed \
     's| .install-cython ||g' \
     -i \
@@ -66,7 +70,7 @@ prepare() {
 
 build() {
   cd \
-    "${_pkgname}-${pkgver}"
+    "${_pkg}-${pkgver}"
   make \
     cythonize
   export \
@@ -88,7 +92,7 @@ build() {
 
 check() {
   cd \
-    "${_pkgname}-${pkgver}"
+    "${_pkg}-${pkgver}"
   "${_py}" \
     -m \
       venv \
@@ -107,7 +111,7 @@ check() {
 
 package() {
   cd \
-    ${_pkgname}-${pkgver}
+    ${_pkg}-${pkgver}
   if [[ "${_pep517}" == 'false' ]]; then
     LANG="en_US.UTF-8" \
     "${_py}" \
