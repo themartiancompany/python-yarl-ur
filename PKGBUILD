@@ -6,6 +6,16 @@
 
 _pep517='true'
 _py="python"
+_py="python"
+_pyver="$( \
+  "${_py}" \
+    -V | \
+    awk \
+      '{print $2}')"
+_pymajver="${_pyver%.*}"
+_pyminver="${_pymajver#*.}"
+_pynextver="${_pymajver%.*}.$(( \
+  ${_pyminver} + 1))"
 _pkg=yarl
 pkgname="${_py}-${_pkg}"
 pkgver=1.9.4
@@ -29,7 +39,8 @@ license=(
 )
 depends=(
   'glibc'
-  "${_py}"
+  "${_py}>=${_pymajver}"
+  "${_py}<${_pynextver}"
   "${_py}-multidict"
   "${_py}-idna"
 )
