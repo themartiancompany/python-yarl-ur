@@ -18,8 +18,8 @@ _pynextver="${_pymajver%.*}.$(( \
   ${_pyminver} + 1))"
 _pkg=yarl
 pkgname="${_py}-${_pkg}"
-pkgver=1.9.4
-pkgrel=2
+pkgver=1.17.1
+pkgrel=1
 pkgdesc='Yet another URL library'
 _http='https://github.com'
 _ns='aio-libs'
@@ -64,10 +64,10 @@ source=(
   "${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz"
 )
 sha512sums=(
-  'e31a36539166034f3b231e1f9fc47b7d0d1aea0424b6054e1858eefa9f290350ee8b1c74bb90a120d6b9f3c13fe7b675d6e0676272b3222b788d479ae9fd3ff5'
+  '88aadff20c4ce599da5caf77ca68d1f257a3c8050a95aca9aa879acb76fb5108cc6ad4fcbe0cc0253c02b01d8c20287009eaf448927dbe057d8f29116bd06959'
 )
 b2sums=(
-  'c0022b32b41c1125d788c656883b3552314b138601fef72cc55ce90fc9986f44912395977ba6ac27d344c0a3593172265fb664eb6a696de9787a2474f61d14ce'
+  '2e044e5879d888bc5c6cb5082342525ee84f3192f5d8b75377e38dd265510da73a669b3044e1d44cbc6bc8c4be5793e4f3afc0ed2b45a70b2068565625b321b9'
 )
 
 prepare() {
