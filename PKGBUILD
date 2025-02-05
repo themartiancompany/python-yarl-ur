@@ -28,10 +28,11 @@ _os="$( \
     -o)"
 if [[ "${_os}" == "Android" ]]; then
   _libc="ndk-sysroot"
+  _pep517="false"
 elif [[ "${_os}" == "GNU/Linux" ]]; then
   _libc="glibc"
+  _pep517="true"
 fi
-_pep517='true'
 _py="python"
 _py="python"
 _pyver="$( \
@@ -96,6 +97,17 @@ sha512sums=(
 b2sums=(
   '2e044e5879d888bc5c6cb5082342525ee84f3192f5d8b75377e38dd265510da73a669b3044e1d44cbc6bc8c4be5793e4f3afc0ed2b45a70b2068565625b321b9'
 )
+if [[ "${_pep517}" == "false" ]]; then
+  source+=(
+    'setup.py'
+  )
+  sha512sums+=(
+    'c13481e9a7c96aca4412da449fa13342997a5eb2e70947e22cbd2d19ab6044d1d56c746b0acda2f830ea01701ebf55e2b93e9211fd6c91be73ba201d4b6bb3c8'
+  )
+  b2sums+=(
+    '267cc44ad9d2c1f11287ab2a34d5fac160611bca1a0bdcf9b071f33584dd588d7024e5e4110485d07ef5fe3d9419a8c94a5ad1f59a7745e9cfb7efc952932668'
+  )
+fi
 
 prepare() {
   cd \
@@ -120,11 +132,13 @@ build() {
       --wheel \
       --no-isolation
   elif [[ "${_pep517}" == 'false' ]]; then
+    cp \
+      "${srcdir}/setup.py" \
+      "."
     LANG="en_US.UTF-8" \
     "${_py}" \
       setup.py \
-        build \
-          -O1
+        build
   fi
 }
 
